@@ -2,6 +2,7 @@ import networkx as nx
 import matplotlib.pyplot as plt
 import requests
 
+
 #connect to etherscan
 def get_account_balance(api_key, address):
     base_url = "https://api.etherscan.io/api"
@@ -49,3 +50,6 @@ def visualize_transaction_graph(transactions):
     nx.draw(G, pos, with_labels=True, node_size=700, node_color="skyblue", font_size=8, font_color="black", font_weight="bold", arrowsize=10)
     plt.title("Ethereum Transaction Graph")
     plt.axis("on")
+
+
+    
