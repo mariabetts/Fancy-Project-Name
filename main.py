@@ -1,6 +1,6 @@
 import streamlit as st
 from streamlit_option_menu import option_menu
-import about, account, home, transactionmapping
+import about, account, address_book, transactionmapping
 import firebase_admin
 from firebase_admin import credentials
 
@@ -22,7 +22,7 @@ class MultiApp:
         with st.sidebar:
             app_choice = option_menu(
                 menu_title='Options ',
-                options=['Home', 'Account', 'Transaction Mapping', 'About'],
+                options=['Login/Register', 'Address Book', 'Transaction Mapping', 'About Project'],
                 menu_icon='chat-text-fill',
                 default_index=1,
                 styles={
@@ -34,11 +34,11 @@ class MultiApp:
                 }
             )
 
-        if app_choice == "Home":
-            home.app()
+        if app_choice == "Address Book":
+            address_book.app()
         elif app_choice == "Transaction Mapping":
             transactionmapping.app()
-        elif app_choice == 'Account':
+        elif app_choice == 'Login/Register':
             account.app()
         elif app_choice == 'About':
             about.app()
@@ -47,9 +47,9 @@ class MultiApp:
 multi_app = MultiApp()
 
 # Add your apps to the MultiApp instance
-multi_app.add_app("Home", home.app)
+multi_app.add_app("Address Book", address_book.app)
 multi_app.add_app("Transaction Mapping", transactionmapping.app)
-multi_app.add_app("Account", account.app)
+multi_app.add_app("Login/Register", account.app)
 multi_app.add_app("About", about.app)
 
 # Run the MultiApp
