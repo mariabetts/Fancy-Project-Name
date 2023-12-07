@@ -1,11 +1,8 @@
-streamlit 
-streamlit_option_menu 
+streamlit
+streamlit_option_menu
 firebase_admin
 requests
 matplotlib
 networkx
 pandas
-plotly.graph_objects 
-plotly.express
 plotly==5.14.0
-
