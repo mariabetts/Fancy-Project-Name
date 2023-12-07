@@ -26,10 +26,10 @@ def heatmap(transactions):
     df = pd.DataFrame(transactions)
 
     df['value'] = df['value'].astype(float) / 1e18 # Convert from Wei to Ether
-    df['to'] = df['to'].astype(str) ## address is seen as str
+
     
     fig = px.density_heatmap(df, x='to', y='value', title='Transaction Amounts to Receiving Addresses',
-                         labels={'value': 'Transaction Amount (ETH)', 'to': 'Receiving Address'})
+                         labels={'value': 'Transaction Amount (ETH)', 'from': 'Receiving Address'})
     
     fig.update_layout(xaxis_title='Receiving Address', yaxis_title='Transaction Amount (ETH)')
     st.plotly_chart(fig)
@@ -39,10 +39,8 @@ def boxplot(transactions):
     df = pd.DataFrame(transactions)
     
     df['value'] = df['value'].astype(float) / 1e18 # Convert from Wei to Ether
-    df['to'] = df['to'].astype(str).replace('[^a-zA-Z0-9]', '', regex=True) ## address is seen as str
-
     fig = px.box(df, x='to', y='value', title='Transaction Amounts from Main Address to Receiving Addresses',
-             labels={'value': 'Transaction Amount (ETH)', 'to': 'Receiving Address'})
+             labels={'value': 'Transaction Amount (ETH)', 'from': 'Receiving Address'})
     
     fig.update_layout(xaxis_title='Receiving Address', yaxis_title='Transaction Amount (ETH)')
     st.plotly_chart(fig)
