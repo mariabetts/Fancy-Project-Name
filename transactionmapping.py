@@ -33,7 +33,7 @@ def app():
             graphing_choice = st.selectbox("Please Select Which Graph To Make",  ['Click Me','Scatter Plot', 'Bubble Map', 'Heatmap', 'Box Plot'])
             transactions = get_transaction_list(api_key, select_address)
             if graphing_choice == "Scatter Plot":
-                scatter_plot(transactions)
+                st.scatter_plot(transactions)
             elif graphing_choice == "Bubble Map":
                 bubblemap(transactions)
                 st.pyplot()
