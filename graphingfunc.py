@@ -39,7 +39,7 @@ def boxplot(transactions):
     df = pd.DataFrame(transactions)
     
     df['value'] = df['value'].astype(float) / 1e18 # Convert from Wei to Ether
-    df['to'] = df['to'].astype(str) ## address is seen as str
+    df['to'] = df['to'].astype(str).replace('[^a-zA-Z0-9]', '', regex=True) ## address is seen as str
 
     fig = px.box(df, x='to', y='value', title='Transaction Amounts from Main Address to Receiving Addresses',
              labels={'value': 'Transaction Amount (ETH)', 'to': 'Receiving Address'})
