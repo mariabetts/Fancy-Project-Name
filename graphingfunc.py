@@ -26,7 +26,7 @@ def heatmap(transactions):
     df = pd.DataFrame(transactions)
 
     df['value'] = df['value'].astype(float) / 1e18 # Convert from Wei to Ether
-
+    ## address is seen as str
     
     fig = px.density_heatmap(df, x='to', y='value', title='Transaction Amounts to Receiving Addresses',
                          labels={'value': 'Transaction Amount (ETH)', 'from': 'Receiving Address'})
@@ -37,12 +37,17 @@ def heatmap(transactions):
 ## box plot 
 def boxplot(transactions):
     df = pd.DataFrame(transactions)
-    
-    df['value'] = df['value'].astype(float) / 1e18 # Convert from Wei to Ether
+
+    df['value'] = df['value'].astype(float) / 1e18  # Convert from Wei to Ether
+    df['to'] = df['to'].astype(str)  # Ensure 'to' column is treated as a string
+
     fig = px.box(df, x='to', y='value', title='Transaction Amounts from Main Address to Receiving Addresses',
-             labels={'value': 'Transaction Amount (ETH)', 'from': 'Receiving Address'})
+                 labels={'value': 'Transaction Amount (ETH)', 'to': 'Receiving Address'})
     
     fig.update_layout(xaxis_title='Receiving Address', yaxis_title='Transaction Amount (ETH)')
+    fig.update_xaxes(type='category')
+    fig.update_traces(hovertemplate='Receiving Address: %{x}<br>Transaction Amount (ETH): %{y}')
+    
     st.plotly_chart(fig)
     
 ## bubble map
