@@ -1,6 +1,6 @@
 import streamlit as st
 from streamlit_option_menu import option_menu
-import about, account, address_book, transactionmapping, addressinfo
+import account, address_book, transactionmapping, addressinfo
 import firebase_admin
 from firebase_admin import credentials
 
