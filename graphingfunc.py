@@ -25,13 +25,16 @@ def scatter_plot(transactions):
 def heatmap(transactions):
     df = pd.DataFrame(transactions)
     df['value'] = df['value'].astype(float) / 1e18  # Convert from Wei to Ether
+    df['to'] = df['to'].astype(str) 
     df['count_capped'] = df.groupby('to')['value'].transform(lambda x: min(x.sum(), 50))
-    df['count_capped'] = df['count_capped'].round(2)
 
     fig = px.density_heatmap(df, x='to', y='count_capped', title='Transaction Amounts to Receiving Addresses',
                          labels={'count_capped': 'Capped Transaction Amount (ETH)', 'to': 'Receiving Address'})
 
     fig.update_layout(xaxis_title='Receiving Address', yaxis_title='Transaction Amount (ETH)')
+    fig.update_xaxes(type='category')
+    fig.update_traces(hovertemplate='Receiving Address: %{x}<br>Transaction Amount (ETH): %{y}')
+
     st.plotly_chart(fig)
     
 ## box plot 
