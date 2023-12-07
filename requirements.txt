@@ -6,4 +6,5 @@ matplotlib
 networkx
 pandas
 plotly.graph_objects 
-plotly.express 
+plotly.express
+plotly==5.14.0
