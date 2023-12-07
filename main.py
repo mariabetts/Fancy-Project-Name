@@ -22,7 +22,7 @@ class MultiApp:
         with st.sidebar:
             app_choice = option_menu(
                 menu_title='Fancy Project Menu ',
-                options=['Login/Register', 'Address Book','Address Information/Insights','Graphing and Visualizing Transactions', 'About Project'],
+                options=['Login/Register', 'Address Book','Address Information/Insights','Graphing and Visualizing Transactions'],
                 default_index=1,
                 styles={
                     "container": {"padding": "5!important", "background-color": 'black'},
@@ -40,8 +40,6 @@ class MultiApp:
             transactionmapping.app()
         elif app_choice == "Address Information/Insights":
             addressinfo.app()
-        elif app_choice == 'About':
-            about.app()
 
         
             
@@ -52,7 +50,6 @@ multi_app = MultiApp()
 multi_app.add_app("Login/Register", account.app)
 multi_app.add_app("Address Book", address_book.app)
 multi_app.add_app("Transaction Mapping", transactionmapping.app)
-multi_app.add_app("About", about.app)
 multi_app.add_app("Address Information/Insights", addressinfo.app)
 
 # Run the MultiApp
