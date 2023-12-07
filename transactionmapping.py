@@ -34,16 +34,16 @@ def app():
             transactions = get_transaction_list(api_key, select_address)
             if graphing_choice == "Scatter Plot":
                 scatter_plot(transactions)
-                st.pyplot
+                st.pyplot()
             elif graphing_choice == "Bubble Map":
                 bubblemap(transactions)
-                st.pyplot
+                st.pyplot()
             elif graphing_choice == 'Heatmap':
                 heatmap(transactions)
-                st.pyplot
+                st.pyplot()
             elif graphing_choice == 'Box Plot':
                 boxplot(transactions)
-                st.pyplot
+                st.pyplot()
                 
             
 
