@@ -43,8 +43,7 @@ def boxplot(transactions):
              labels={'value': 'Transaction Amount (ETH)', 'to': 'Receiving Address'})
     
     fig.update_layout(xaxis_title='Receiving Address', yaxis_title='Transaction Amount (ETH)')
-    fig.show()
-    
+    st.plotly_chart(fig)
     
 ## bubble map
 def bubblemap(transactions):
@@ -58,6 +57,6 @@ def bubblemap(transactions):
                  hover_data={'from': True, 'value': True, 'timeStamp': '|%Y-%m-%d %H:%M:%S'})
     
     fig.update_layout(xaxis_title='Time', yaxis_title='Transaction Amount (ETH)')
-    fig.show()
+    st.plotly_chart(fig)
     
     
