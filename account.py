@@ -1,12 +1,15 @@
 import streamlit as st
 import firebase_admin
-from firebase_admin import firestore
-from firebase_admin import credentials 
-from firebase_admin import auth
+from firebase_admin import firestore, credentials, auth, initialize_app
+import toml
+
+secrets_path = ".streamlit/secrets.toml"
+secrets = toml.load(secrets_path)
+
+cred = credentials.Certificate(secrets)
+initialize_app(cred)
 
 
-cred = credentials.Certificate('/Users/mariabetts/Downloads/fancy-project-name-c09f0-bedc48465068.json')
-firebase_admin.initialize_app(cred) 
 def app():
     st.title('Please Login or Register to access the mapping tools')
     
