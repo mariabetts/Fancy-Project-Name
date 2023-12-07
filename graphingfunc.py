@@ -3,6 +3,7 @@ import matplotlib.pyplot as plt
 import pandas as pd 
 import plotly.graph_objects as go
 import plotly.express as px
+from io import BytesIO
 
 ## plot for transactions over time
 def scatter_plot(transactions):
@@ -12,12 +13,19 @@ def scatter_plot(transactions):
     df['value'] = df['value'].astype(float) / 1e18  # Convert from Wei to Ether
     df['value'] = df['value'].round(2)
 
+    fig, ax = plt.subplots()
+    
     fig = px.scatter(df, x='timeStamp', y='value', title='Transaction Amounts Over Time', 
                          labels={'value': 'Transaction Amount (ETH)', 'timeStamp': 'Time'},
                          hover_data={'to': True, 'value': True, 'timeStamp': '|%Y-%m-%d %H:%M:%S'})
     
     fig.update_layout(xaxis_title='Time', yaxis_title='Transaction Amount (ETH)')
-    fig.show()
+
+    buf = BytesIO()
+    plt.savefig(buf, format='png')
+    buf.seek(0)
+    st.image(buf)
+    plt.close(fig)
 
 ## plot for heatmap based on transaction amounts to receving address
 def heatmap(transactions):

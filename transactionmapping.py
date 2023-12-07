@@ -34,7 +34,6 @@ def app():
             transactions = get_transaction_list(api_key, select_address)
             if graphing_choice == "Scatter Plot":
                 scatter_plot(transactions)
-                st.pyplot()
             elif graphing_choice == "Bubble Map":
                 bubblemap(transactions)
                 st.pyplot()
