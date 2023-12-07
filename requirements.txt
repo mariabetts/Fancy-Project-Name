@@ -4,3 +4,6 @@ firebase_admin
 requests
 matplotlib.pyplot
 networkx
+pandas
+plotly.graph_objects 
+plotly.express 

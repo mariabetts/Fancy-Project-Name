@@ -21,8 +21,7 @@ def app():
         st.write("Welcome to the Transaction Mapping Tool")
         api_key = "ZACGG1654HI5ANR3P2XIX558YRQGCR4UI5"
 
-        
-
+    
         ether_address = get_saved_eth_addresses(st.session_state.username)
         if ether_address:
             select_address = st.selectbox("Please Select a saved address", ether_address)

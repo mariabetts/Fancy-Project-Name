@@ -8,19 +8,14 @@ from firebase_admin import auth
 cred = credentials.Certificate('/Users/mariabetts/Downloads/fancy-project-name-c09f0-bedc48465068.json')
 firebase_admin.initialize_app(cred) 
 def app():
-# Usernm = []
-
-
     st.title('Please Login or Register to access the mapping tools')
-
+    
     if 'username' not in st.session_state:
         st.session_state.username = ''
     if 'useremail' not in st.session_state:
         st.session_state.useremail = ''
 
-
-
-    def f(): 
+    def loginfunc(): 
         try:
             user = auth.get_user_by_email(email)
             print(user.uid)
@@ -37,15 +32,10 @@ def app():
         except: 
             st.warning('Login Failed')
 
-    def t():
+    def logoutfunc():
         st.session_state.signout = False
         st.session_state.signedout = False   
-        st.session_state.username = ''
-
-
-        
-    
-        
+        st.session_state.username = ''        
     if "signedout"  not in st.session_state:
         st.session_state["signedout"] = False
     if 'signout' not in st.session_state:
@@ -54,28 +44,25 @@ def app():
 
         
     
-    if  not st.session_state["signedout"]: # only show if the state is False, hence the button has never been clicked
+    if  not st.session_state["signedout"]: 
         choice = st.selectbox('Login/Signup',['Login','Sign up'])
         email = st.text_input('Email Address')
         password = st.text_input('Password',type='password')
         
-
-        
         if choice == 'Sign up':
-            username = st.text_input("Enter  your unique username")
+            username = st.text_input("Enter a username")
             
             if st.button('Create my account'):
                 user = auth.create_user(email = email, password = password,uid=username)
-                
                 st.success('Account created successfully!')
                 st.markdown('Please Login using your email and password')
                 st.balloons()
         else:
-            # st.button('Login', on_click=f)          
-            st.button('Login', on_click=f)
+           
+            st.button('Login', on_click=loginfunc)
             
             
     if st.session_state.signout:
                 st.text('Name '+st.session_state.username)
                 st.text('Email id: '+st.session_state.useremail)
-                st.button('Sign out', on_click=t) 
+                st.button('Sign out', on_click=logoutfunc) 
