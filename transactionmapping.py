@@ -2,8 +2,8 @@ import streamlit as st
 import networkx as nx
 import matplotlib.pyplot as plt
 from firebase_admin import firestore
-from connectionutils import get_transaction_list, get_account_balance
-from graphingfunc import scatter_plot, bubblemap, heatmap, boxplot
+from utils.connectionutils import get_transaction_list, get_account_balance
+from utils.graphingfunc import scatter_plot, bubblemap, heatmap, boxplot
 from address_book import get_saved_eth_addresses
 
 def app():
