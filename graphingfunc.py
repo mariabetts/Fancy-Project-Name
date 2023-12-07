@@ -24,13 +24,13 @@ def scatter_plot(transactions):
 ## plot for heatmap based on transaction amounts to receving address
 def heatmap(transactions):
     df = pd.DataFrame(transactions)
+    df['value'] = df['value'].astype(float) / 1e18  # Convert from Wei to Ether
+    df['count_capped'] = df.groupby('to')['value'].transform(lambda x: min(x.sum(), 50))
+    df['count_capped'] = df['count_capped'].round(2)
 
-    df['value'] = df['value'].astype(float) / 1e18 # Convert from Wei to Ether
-    ## address is seen as str
-    
-    fig = px.density_heatmap(df, x='to', y='value', title='Transaction Amounts to Receiving Addresses',
-                         labels={'value': 'Transaction Amount (ETH)', 'from': 'Receiving Address'})
-    
+    fig = px.density_heatmap(df, x='to', y='count_capped', title='Transaction Amounts to Receiving Addresses',
+                         labels={'count_capped': 'Capped Transaction Amount (ETH)', 'to': 'Receiving Address'})
+
     fig.update_layout(xaxis_title='Receiving Address', yaxis_title='Transaction Amount (ETH)')
     st.plotly_chart(fig)
     
