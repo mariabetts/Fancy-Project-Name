@@ -23,7 +23,7 @@ class MultiApp:
             app_choice = option_menu(
                 menu_title='Fancy Project Menu ',
                 options=['Login/Register', 'Address Book','Address Information/Insights','Graphing and Visualizing Transactions'],
-                default_index=1,
+                default_index=0,
                 styles={
                     "container": {"padding": "5!important", "background-color": 'black'},
                     "icon": {"color": "white", "font-size": "23px"},
