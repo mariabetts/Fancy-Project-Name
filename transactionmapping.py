@@ -40,17 +40,16 @@ def app():
                 st.pyplot(transactions)
             elif graphing_choice == 'Heatmap':
                 heatmap(transactions)
-                st.pyplot()
+                st.pyplot
             elif graphing_choice == 'Box Plot':
                 boxplot(transactions)
-                st.pyplot()
+                st.pyplot
                 
             
 
             
         
 
-            
             
  
             
