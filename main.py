@@ -1,10 +1,8 @@
 import streamlit as st
 from streamlit_option_menu import option_menu
-import account, address_book, transactionmapping, addressinfo
+import blockchaindemo, account, address_book, transactionmapping, addressinfo
 import firebase_admin
 from firebase_admin import credentials
-
-
 
 class MultiApp:
 
@@ -21,8 +19,8 @@ class MultiApp:
     def run(self):
         with st.sidebar:
             app_choice = option_menu(
-                menu_title='Fancy Project Menu ',
-                options=['Login/Register', 'Address Book','Address Information/Insights','Graphing and Visualizing Transactions'],
+                menu_title='Ethereum Address Analysis for Cyber Investigations',
+                options=['Login/Register', 'Address Book','Address Information/Insights','Graphing and Visualizing Transactions', 'Demo of a Blockchain'],
                 default_index=0,
                 styles={
                     "container": {"padding": "5!important", "background-color": 'black'},
@@ -32,14 +30,16 @@ class MultiApp:
                     "nav-link-selected": {"background-color": "#02ab21"},
                 }
             )
-        if app_choice == 'Login/Register':
-            account.app()
-        elif app_choice == "Address Book":
+        if app_choice == 'Address Book':
             address_book.app()
+        elif app_choice == "Login/Register":
+            account.app()
         elif app_choice == "Graphing and Visualizing Transactions":
             transactionmapping.app()
         elif app_choice == "Address Information/Insights":
             addressinfo.app()
+        elif app_choice == 'Demo of a Blockchain':
+            blockchaindemo.app()
 
         
             
@@ -50,10 +50,10 @@ multi_app = MultiApp()
 multi_app.add_app("Login/Register", account.app)
 multi_app.add_app("Address Book", address_book.app)
 multi_app.add_app("Transaction Mapping", transactionmapping.app)
+multi_app.add_app("Demo of a Blockchain", blockchaindemo.app)
 multi_app.add_app("Address Information/Insights", addressinfo.app)
 
 # Run the MultiApp
 multi_app.run()
-
 
 
