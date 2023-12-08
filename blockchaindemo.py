@@ -18,9 +18,9 @@ def app():
         st.title("Create and view how blockchains work")
         st.write("Here, you can learn how blockchain hashes are made and verified")
         
-        input_sender = st.text_input("Input Sender")
-        input_receiver = st.text_input("Input Receiver")
-        input_amount = st.text_input("Insert Amount")
+        input_sender = st.text_input("Input Sender's Name")
+        input_receiver = st.text_input("Input Receiver's Name")
+        input_amount = st.text_input("Insert Amount Number")
         
         pychain = setup()  
         if st.button("Add Block"):
@@ -40,4 +40,4 @@ def app():
             st.write(pychain_df)
 
         if st.button("Validate Chain"):
-            st.write(pychain.is_block_valid)
+            st.write(pychain.is_block_valid())
