@@ -5,7 +5,5 @@ requests
 matplotlib
 networkx
 pandas
-hashlib
-datetime
 plotly==5.14.0
 
