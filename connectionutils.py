@@ -51,16 +51,26 @@ def get_address_info(address):
 
     if not transactions:
         return {
-            'Latest Transaction Date': 'No transactions',
+            'Latest Transaction Date to Address': 'No transactions',
+            'Latest Transaction Date from Address': 'No transactions',
             'Minimum Transaction Value (ETH)': 'No transactions',
             'Maximum Transaction Value (ETH)': 'No transactions',
             'Most Common Address Received From': 'No transactions',
             'Most Common Address Sent To': 'No transactions'
         }
-    
-    # get date of the latest transaction
-    latest_transaction_timestamp = int(transactions[0]['timeStamp'])
-    latest_transaction_date = datetime.utcfromtimestamp(latest_transaction_timestamp).strftime('%m/%d/%Y %H:%M:%S')
+    ## new func that shows date of to and from 
+    latest_transaction_to = next((tx for tx in transactions if tx['to'].lower() == address.lower()), None)
+    latest_transaction_from = next((tx for tx in transactions if tx['from'].lower() == address.lower()), None)
+
+    latest_transaction_date_to = (
+        datetime.utcfromtimestamp(int(latest_transaction_to['timeStamp'])).strftime('%m/%d/%Y %H:%M:%S')
+        if latest_transaction_to else 'No transactions'
+    )
+
+    latest_transaction_date_from = (
+        datetime.utcfromtimestamp(int(latest_transaction_from['timeStamp'])).strftime('%m/%d/%Y %H:%M:%S')
+        if latest_transaction_from else 'No transactions'
+    )
     
     # get minimum and maximum transaction values (converted to Ether using the metrics in graphfunc)
     transaction_values = [int(tx['value']) for tx in transactions]
@@ -75,7 +85,8 @@ def get_address_info(address):
     common_from_address = max(set(from_addresses), key=from_addresses.count)
     
     return {
-        'Latest Transaction Date': latest_transaction_date,
+        'Latest Transaction Date to Address': latest_transaction_date_to,
+        'Latest Transaction Date to Address' : latest_transaction_date_from
         'Minimum Transaction Value (ETH)': f'{min_transaction:.4f}',
         'Maximum Transaction Value (ETH)': f'{max_transaction:.4f}',
         'Most Common Address Received From': common_from_address,
