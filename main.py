@@ -1,6 +1,6 @@
 import streamlit as st
 from streamlit_option_menu import option_menu
-import blockchaindemo, account, address_book, transactionmapping, addressinfo
+import blockchaindemo, account, address_book, transactionmapping, addressinfo, faqpage
 import firebase_admin
 from firebase_admin import credentials
 
@@ -20,7 +20,7 @@ class MultiApp:
         with st.sidebar:
             app_choice = option_menu(
                 menu_title='Ethereum Address Analysis for Cyber Investigations',
-                options=['Login/Register', 'Address Book','Address Information/Insights','Graphing and Visualizing Transactions', 'Demo of a Blockchain'],
+                options=['Login/Register', 'Address Book','Address Information/Insights','Graphing and Visualizing Transactions', 'Demo of a Blockchain', 'FAQ Page'],
                 default_index=0,
                 styles={
                     "container": {"padding": "5!important", "background-color": 'black'},
@@ -40,6 +40,8 @@ class MultiApp:
             addressinfo.app()
         elif app_choice == 'Demo of a Blockchain':
             blockchaindemo.app()
+        elif app_choice == 'FAQ Page'
+            faqpage.app()
 
         
             
@@ -52,7 +54,7 @@ multi_app.add_app("Address Book", address_book.app)
 multi_app.add_app("Transaction Mapping", transactionmapping.app)
 multi_app.add_app("Demo of a Blockchain", blockchaindemo.app)
 multi_app.add_app("Address Information/Insights", addressinfo.app)
-
+multi_app.add_app("FAQ Page", faqpage.app)
 # Run the MultiApp
 multi_app.run()
 
