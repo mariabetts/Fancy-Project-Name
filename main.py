@@ -40,7 +40,7 @@ class MultiApp:
             addressinfo.app()
         elif app_choice == 'Demo of a Blockchain':
             blockchaindemo.app()
-        elif app_choice == 'FAQ Page'
+        elif app_choice == 'FAQ Page':
             faqpage.app()
 
         
