@@ -1,7 +1,7 @@
 import networkx as nx
 import matplotlib.pyplot as plt
 import pandas as pd 
-from datetime import datetime
+from datetime import timezone
 import requests
 
 #connect to etherscan
