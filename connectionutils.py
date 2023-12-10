@@ -86,7 +86,7 @@ def get_address_info(address):
     
     return {
         'Latest Transaction Date to Address': latest_transaction_date_to,
-        'Latest Transaction Date to Address' : latest_transaction_date_from
+        'Latest Transaction Date to Address' : latest_transaction_date_from,
         'Minimum Transaction Value (ETH)': f'{min_transaction:.4f}',
         'Maximum Transaction Value (ETH)': f'{max_transaction:.4f}',
         'Most Common Address Received From': common_from_address,
