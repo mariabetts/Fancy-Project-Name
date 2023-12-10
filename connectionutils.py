@@ -38,10 +38,12 @@ def get_transaction_list(api_key, address):
     data = response.json()
 
     return data["result"]
+
+
 def get_address_info(address):
     base_url = 'https://api.etherscan.io/api'
     api_key = "ZACGG1654HI5ANR3P2XIX558YRQGCR4UI5"
-    
+
     transactions_url = f'{base_url}?module=account&action=txlist&address={address}&apikey={api_key}'
     transactions_response = requests.get(transactions_url)
     transactions_data = transactions_response.json()
@@ -49,47 +51,44 @@ def get_address_info(address):
 
     if not transactions:
         return {
-            'Latest Transaction Date to Address': 'No transactions',
-            'Latest Transaction Date from Address': 'No transactions',
+            'Latest Transaction Age (days)': 'No transactions',
+            'Oldest Transaction Age (days)': 'No transactions',
             'Minimum Transaction Value (ETH)': 'No transactions',
             'Maximum Transaction Value (ETH)': 'No transactions',
             'Most Common Address Received From': 'No transactions',
-            'Most Common Address Sent To': 'No transactions'
+            'Most Common Address Sent To': 'No transactions',
+            'Latest Movement Type': 'No transactions',
+            'Account Age': 'No transactions',
+            
         }
-        
-    ## new func that shows date of to and from 
-    latest_transaction_to = next((tx for tx in transactions if tx['to'].lower() == address.lower()), None)
-    latest_transaction_from = next((tx for tx in transactions if tx['from'].lower() == address.lower()), None)
 
-    for tx in transactions:
-        if tx['to'].lower() == address.lower():
-            latest_transaction_to = datetime.utcfromtimestamp(int(tx['timeStamp'])).strftime('%m/%d/%Y %H:%M:%S')
-            break
-
-    for tx in transactions:
-        if tx['from'].lower() == address.lower():
-            latest_transaction_from = datetime.utcfromtimestamp(int(tx['timeStamp'])).strftime('%m/%d/%Y %H:%M:%S')
-            break
-    
-    # get minimum and maximum transaction values (converted to Ether using the metrics in graphfunc)
+    # Get minimum and maximum transaction values (converted to Ether using the metrics in graphfunc)
     transaction_values = [int(tx['value']) for tx in transactions]
     min_transaction = min(transaction_values) / 1e18
     max_transaction = max(transaction_values) / 1e18
-    
-    # get the most common addresses received from and sent to address wanted
+
+    # Get the most common addresses received from and sent to the address
     to_addresses = [tx['to'] for tx in transactions]
     from_addresses = [tx['from'] for tx in transactions]
-    
+
     common_to_address = max(set(to_addresses), key=to_addresses.count)
     common_from_address = max(set(from_addresses), key=from_addresses.count)
-    
+
+    # Get the timestamp of the oldest/newest transaction
+    oldest_transaction_timestamp = min(int(tx['timeStamp']) for tx in transactions)
+    youngest_transaction_timestamp = max(int(tx['timeStamp']) for tx in transactions)
+
+    # Convert the timestamp to UTC
+    oldest_transaction_utc = datetime.utcfromtimestamp(oldest_transaction_timestamp).replace(tzinfo=timezone.utc)
+    youngest_transaction_timestamp_utc = datetime.utcfromtimestamp(youngest_transaction_timestamp).replace(tzinfo=timezone.utc)
     return {
-        'Latest Transaction Date to Address': latest_transaction_to,
-        'Latest Transaction Date from Address' : latest_transaction_from,
+        'Oldest Transaction Date:': f'{oldest_transaction_utc}',
+        'Latest Transaction Date:': f'{youngest_transaction_timestamp_utc}',
         'Minimum Transaction Value (ETH)': f'{min_transaction:.4f}',
         'Maximum Transaction Value (ETH)': f'{max_transaction:.4f}',
         'Most Common Address Received From': common_from_address,
-        'Most Common Address Sent To': common_to_address
+        'Most Common Address Sent To': common_to_address,
+        
     }
 
 
