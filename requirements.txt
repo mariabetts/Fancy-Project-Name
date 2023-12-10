@@ -6,6 +6,5 @@ matplotlib
 networkx
 pandas
 datetime
-timezone
 plotly==5.14.0
 
