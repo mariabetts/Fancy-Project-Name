@@ -19,7 +19,7 @@ class MultiApp:
     def run(self):
         with st.sidebar:
             app_choice = option_menu(
-                menu_title='Ethereum Address Analysis for Cyber Investigations',
+                menu_title='Etherview',
                 options=['Login/Register', 'Address Book','Address Information/Insights','Graphing and Visualizing Transactions', 'Demo of a Blockchain', 'FAQ Page'],
                 default_index=0,
                 styles={
