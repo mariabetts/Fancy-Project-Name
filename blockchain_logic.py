@@ -15,7 +15,7 @@ class Records:
 class Block:
     records:Records
     creator_id:int  
-    previous_hash: str = "0"
+    previous_hash: str = ""
     timestamp: str = datetime.datetime.utcnow().strftime("%H:%M:%S")
     nonce: str = 0
     

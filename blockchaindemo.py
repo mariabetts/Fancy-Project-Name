@@ -28,7 +28,7 @@ def app():
             prev_block_hash = prev_block.hash_block()
             new_block = Block(
             records = Records(sender=input_sender, receiver=input_receiver, amount=input_amount),
-            creator_id = 42,
+            creator_id = 13,
             previous_hash = prev_block_hash
         )
         
