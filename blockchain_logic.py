@@ -65,7 +65,7 @@ class PyChain:
         for block in self.chain[1:]:
             if block_hash != block.previous_hash:
                 print("Invalid Blockchain")
-                return False
+                return True
             
             block_hash = block.hash_block
         
